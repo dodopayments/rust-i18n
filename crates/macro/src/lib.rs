@@ -505,7 +505,7 @@ fn generate_code(
         #[doc(hidden)]
         #[allow(missing_docs)]
         pub fn _rust_i18n_lookup_fallback(locale: &str) -> Option<&str> {
-            locale.rfind('-').map(|n| locale[..n].trim_end_matches("-x"))
+            locale.rfind('-').and_then(|n| locale.get(..n)).map(|s| s.trim_end_matches("-x"))
         }
 
         /// Get I18n text by locale and key
